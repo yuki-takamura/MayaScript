@@ -1,18 +1,8 @@
 import pymel.core as pm
-import FUCBoxCreator
-import FUCSphereCreator
+import MakePrimitive as maker
 import ChangeDrawOverride as changer
 
 from functools import partial
-
-def MakePrimitive(s) :
-    BOX = 1
-    SPHERE = 2
-
-    if s == BOX:
-        FUCBoxCreator.FUCBoxCreator()
-    elif s == SPHERE:
-        FUCSphereCreator.FUCSphereCreator()
 
 with pm.window(title='Collider Edit'):
     with pm.columnLayout(adjustableColumn = True):
@@ -23,16 +13,15 @@ with pm.window(title='Collider Edit'):
 
         pm.separator(style = 'none')
 
-        selectNum = rdoGrp.getSelect()
-        pm.button(label = 'create', c = 'MakePrimitive(selectNum)')
+        pm.button(label = 'create', c = 'maker.MakePrimitive(rdoGrp.getSelect())')
 
         pm.separator(style = 'none')
 
-        pm.columnLayout( adjustableColumn = False)
+        pm.columnLayout(adjustableColumn = False)
 
         pm.text(label = '表示切替')
 
-        pm.button(label = 'シェーディング', c = 'changer.ChangeShadingMode(selectNum, True)')
-        pm.button(label = 'ワイヤ', c = 'changer.ChangeShadingMode(selectNum, False)')
-        pm.button(label = '非表示', c = 'changer.ChangeVisibility(selectNum, False)')
-        pm.button(label = '表示', c = 'changer.ChangeVisibility(selectNum, True)')
+        pm.button(label = 'シェーディング', c = 'changer.ChangeShadingMode(rdoGrp.getSelect(), True)')
+        pm.button(label = 'ワイヤ', c = 'changer.ChangeShadingMode(rdoGrp.getSelect(), False)')
+        pm.button(label = '非表示', c = 'changer.ChangeVisibility(rdoGrp.getSelect(), False)')
+        pm.button(label = '表示', c = 'changer.ChangeVisibility(rdoGrp.getSelect(), True)')
