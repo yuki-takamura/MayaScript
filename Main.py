@@ -1,6 +1,9 @@
 import pymel.core as pm
 import FUCBoxCreator
 import FUCSphereCreator
+import ChangeDrawOverride as changer
+
+from functools import partial
 
 def MakePrimitive(s) :
     BOX = 1
@@ -20,4 +23,16 @@ with pm.window(title='Collider Edit'):
 
         pm.separator(style = 'none')
 
-        pm.button(label = 'create', c = 'MakePrimitive(rdoGrp.getSelect())')
+        selectNum = rdoGrp.getSelect()
+        pm.button(label = 'create', c = 'MakePrimitive(selectNum)')
+
+        pm.separator(style = 'none')
+
+        pm.columnLayout( adjustableColumn = False)
+
+        pm.text(label = '表示切替')
+
+        pm.button(label = 'シェーディング', c = 'changer.ChangeShadingMode(selectNum, True)')
+        pm.button(label = 'ワイヤ', c = 'changer.ChangeShadingMode(selectNum, False)')
+        pm.button(label = '非表示', c = 'changer.ChangeVisibility(selectNum, False)')
+        pm.button(label = '表示', c = 'changer.ChangeVisibility(selectNum, True)')
