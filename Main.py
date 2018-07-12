@@ -3,16 +3,19 @@ import FUCBoxCreator
 import FUCSphereCreator
 
 def MakePrimitive(s) :
-    if s == 1:
+    BOX = 1
+    SPHERE = 2
+
+    if s == BOX:
         FUCBoxCreator.FUCBoxCreator()
-    elif s == 2:
+    elif s == SPHERE:
         FUCSphereCreator.FUCSphereCreator()
 
-with pm.window(title='controller sampler UI'):
+with pm.window(title='Collider Edit'):
     with pm.columnLayout(adjustableColumn = True):
-        pm.text(label = 'radio button')
+        pm.text(label = 'Primitive')
         rdoGrp = pm.radioButtonGrp(numberOfRadioButtons = 2,
-        label = 'Box or Sphere',
+        label = 'Box or Sphere    ',
         labelArray2 = ['Box', 'Sphere'])
 
         pm.separator(style = 'none')
