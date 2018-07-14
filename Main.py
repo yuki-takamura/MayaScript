@@ -9,14 +9,13 @@ with pm.window(title='コライダ エディタ') as editorWin:
     with pm.columnLayout(adjustableColumn = False):
         pm.text(label = 'プリミティブ')
         rdoGrp = pm.radioButtonGrp(numberOfRadioButtons = 2,
-        label = 'Box or Sphere    ',
         labelArray2 = ['Box', 'Sphere'],
         on1 = 'maker.MakePrimitive(rdoGrp.getSelect())',
         on2 = 'maker.MakePrimitive(rdoGrp.getSelect())')
 
         pm.separator(style = 'none')
         pm.separator(style = 'none')
-        pm.text(label = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+        pm.text(label = '')
 
         pm.columnLayout(adjustableColumn = False)
 

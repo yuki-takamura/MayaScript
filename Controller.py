@@ -1,3 +1,5 @@
+#UIの参考(実際には使わない)
+
 import pymel.core as pm
 
 with pm.window(title='controller sampler UI'):
