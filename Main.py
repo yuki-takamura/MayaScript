@@ -5,35 +5,32 @@ import ChangeDrawOverride as changer
 
 from functools import partial
 
-with pm.window(title='Collider Edit'):
-    with pm.columnLayout(adjustableColumn = True):
-        pm.text(label = 'Primitive')
+with pm.window(title='コライダ エディタ') as editorWin:
+    with pm.columnLayout(adjustableColumn = False):
+        pm.text(label = 'プリミティブ')
         rdoGrp = pm.radioButtonGrp(numberOfRadioButtons = 2,
         label = 'Box or Sphere    ',
-        labelArray2 = ['Box', 'Sphere'])
+        labelArray2 = ['Box', 'Sphere'],
+        on1 = 'maker.MakePrimitive(rdoGrp.getSelect())',
+        on2 = 'maker.MakePrimitive(rdoGrp.getSelect())')
 
         pm.separator(style = 'none')
-
-        buttonName = 'create'
-        createEvent = 'maker.MakePrimitive(rdoGrp.getSelect()),'
-        createEvent += 'pm.disable(buttonName)'
-
-        if rdoGrp.getSelect() != 0:
-            pm.button(buttonName, label = 'create', c = createEvent)
-        pm.disable(buttonName)
-
         pm.separator(style = 'none')
+        pm.text(label = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
 
         pm.columnLayout(adjustableColumn = False)
 
         pm.text(label = '表示切替')
 
-        pm.button(label = 'シェーディング', c = 'changer.ChangeShadingMode(rdoGrp.getSelect(), True)')
-        pm.button(label = 'ワイヤ', c = 'changer.ChangeShadingMode(rdoGrp.getSelect(), False)')
-        pm.button(label = '非表示', c = 'changer.ChangeVisibility(rdoGrp.getSelect(), False)')
-        pm.button(label = '表示', c = 'changer.ChangeVisibility(rdoGrp.getSelect(), True)')
+        pm.checkBox(label = 'ワイヤ / シェーディング',
+        onc = 'changer.ChangeShadingMode(rdoGrp.getSelect(), True)',
+        ofc = 'changer.ChangeShadingMode(rdoGrp.getSelect(), False)')
+
+        pm.checkBox(label = '可視',
+        v = True,
+        onc = 'changer.ChangeVisibility(rdoGrp.getSelect(), True)',
+        ofc = 'changer.ChangeVisibility(rdoGrp.getSelect(), False)')
 
         pm.separator()
 
-        #pm.text(label = 'バウンディングスフィア')
-        #sld = pm.floatSliderGrp(label = '半径')
+        pm.button(label = '閉じる', c = 'editorWin.delete()')
