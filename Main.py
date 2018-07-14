@@ -1,4 +1,5 @@
 import pymel.core as pm
+import maya.mel as mel
 import MakePrimitive as maker
 import ChangeDrawOverride as changer
 
@@ -13,7 +14,13 @@ with pm.window(title='Collider Edit'):
 
         pm.separator(style = 'none')
 
-        pm.button(label = 'create', c = 'maker.MakePrimitive(rdoGrp.getSelect())')
+        buttonName = 'create'
+        createEvent = 'maker.MakePrimitive(rdoGrp.getSelect()),'
+        createEvent += 'pm.disable(buttonName)'
+
+        if rdoGrp.getSelect() != 0:
+            pm.button(buttonName, label = 'create', c = createEvent)
+        pm.disable(buttonName)
 
         pm.separator(style = 'none')
 
@@ -25,3 +32,8 @@ with pm.window(title='Collider Edit'):
         pm.button(label = 'ワイヤ', c = 'changer.ChangeShadingMode(rdoGrp.getSelect(), False)')
         pm.button(label = '非表示', c = 'changer.ChangeVisibility(rdoGrp.getSelect(), False)')
         pm.button(label = '表示', c = 'changer.ChangeVisibility(rdoGrp.getSelect(), True)')
+
+        pm.separator()
+
+        #pm.text(label = 'バウンディングスフィア')
+        #sld = pm.floatSliderGrp(label = '半径')
