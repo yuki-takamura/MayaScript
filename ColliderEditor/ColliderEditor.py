@@ -6,9 +6,9 @@ import DeleteFUC as dFUC
 
 from functools import partial
 
-with pm.window(title='コライダ エディタ') as editorWin:
+with pm.window(title='ColliderEditor') as editorWin:
     with pm.columnLayout(adjustableColumn = False):
-        pm.text(label = 'プリミティブ', fn = 'boldLabelFont')
+        pm.text(label = 'Primitive', fn = 'boldLabelFont')
         rdoGrp = pm.radioButtonGrp(numberOfRadioButtons = 2,
         labelArray2 = ['Box', 'Sphere'],
         on1 = 'maker.MakePrimitive(rdoGrp.getSelect())',
@@ -16,24 +16,24 @@ with pm.window(title='コライダ エディタ') as editorWin:
 
         pm.separator(style = 'none')
         pm.text(label = '')
-        pm.button(label = '削除', c = 'dFUC.DeleteFUC(),')
+        pm.button(label = 'Delete', c = 'dFUC.DeleteFUC(),')
 
         pm.separator(style = 'none')
         pm.text(label = '')
 
         pm.columnLayout(adjustableColumn = False)
 
-        pm.text(label = '表示切替', fn = 'boldLabelFont')
+        pm.text(label = 'Change View Mode', fn = 'boldLabelFont')
 
-        pm.checkBox(label = 'ワイヤ / シェーディング',
+        pm.checkBox(label = 'Wireframe or Shading',
         onc = 'changer.ChangeShadingMode(rdoGrp.getSelect(), True)',
         ofc = 'changer.ChangeShadingMode(rdoGrp.getSelect(), False)')
 
-        pm.checkBox(label = '可視',
+        pm.checkBox(label = 'View',
         v = True,
         onc = 'changer.ChangeVisibility(rdoGrp.getSelect(), True)',
         ofc = 'changer.ChangeVisibility(rdoGrp.getSelect(), False)')
 
         pm.separator(style = 'none')
         pm.text(label = '')
-        pm.button(label = '閉じる', c = 'editorWin.delete()')
+        pm.button(label = 'Close', c = 'editorWin.delete()')

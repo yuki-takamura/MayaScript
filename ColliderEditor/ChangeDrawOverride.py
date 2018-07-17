@@ -1,5 +1,3 @@
-# モデルの描画オーバーライドを変更する関数
-
 import maya.mel as mel
 
 BOX = 1
