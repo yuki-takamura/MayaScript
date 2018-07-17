@@ -4,7 +4,7 @@ import maya.cmds as cmds
 
 def FUCSphereCreator():
     pos = [0, 0, 0]
-    thisR = 0.5
+    thisR = 1
 
     try:
         pm.select('FUC_Sphere')
@@ -25,7 +25,7 @@ def FUCSphereCreator():
     except:
         pass
 
-    pm.polySphere(name = 'FUC_Sphere')
+    pm.polySphere(name = 'FUC_Sphere', r = 1)
     pm.move(pos)
     pm.scale(thisR, thisR, thisR)
     mel.eval('setAttr "FUC_Sphere.overrideEnabled" 1;')

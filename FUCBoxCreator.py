@@ -20,7 +20,10 @@ def FUCBoxCreator():
 
     try:
         pm.select('FUC_Sphere')
-        pos = cmds.objectCenter('FUC_Sphere', gl = True)
+        posX = pm.getAttr('FUC_Sphere' + '.tx')
+        posY = pm.getAttr('FUC_Sphere' + '.ty')
+        posZ = pm.getAttr('FUC_Sphere' + '.tz')
+        pos = [posX, posY, posZ]
         r = pm.getAttr('FUC_Sphere' + '.sx')
         thisW = r
         thisH = thisW
@@ -29,7 +32,7 @@ def FUCBoxCreator():
     except:
         pass
 
-    pm.polyCube(name = 'FUC_Box')
+    pm.polyCube(name = 'FUC_Box', w = 1, h = 1, d = 1)
     pm.move(pos)
     pm.scale(thisW, thisH, thisD)
     mel.eval('setAttr "FUC_Box.overrideEnabled" 1;')
